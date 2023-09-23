@@ -1,0 +1,43 @@
+import funcs as fu # This is redundant... and just takes up extra memory as it is in boot.py
+
+# Initialize our neopixel(s)
+np = fu.init_neo()
+fu.test_neo_1(np)
+# Setup a loop counter for controlling our tasks
+# Plan to potentially convert this to "utime" to use the internal clock
+loop_ctr = 0
+prime_ctr = 0
+
+i2c_h = fu.init_i2c()
+oled_handle = fu.init_oled(i2c_h)
+fu.oled_test_write(oled_handle)
+spi_hnd, scs = fu.init_spi_eeprom()
+fu.write_i2c(i2c_h, b'test_data_writen')
+fu.time.sleep(.01)
+read_data = fu.read_i2c(i2c_h)
+print("i2c_data: ", read_data)
+fu.test_spi(spi_hnd, scs)
+fu.oled_update(oled_handle)
+fu.test_neo_3(np)
+fu.time.sleep(1)
+fu.oled_test_write(oled_handle)
+fu.test_neo_1(np)
+fu.time.sleep(1)
+# fu.oled_update(oled_handle)
+# fu.test_neo_2(np)
+# fu.time.sleep(1)
+# fu.oled_test_write(oled_handle)
+# fu.test_neo_3(np)
+# fu.time.sleep(1)
+# fu.oled_update(oled_handle)
+# fu.test_neo_1(np)
+# fu.time.sleep(1)
+# fu.oled_test_write(oled_handle)
+# fu.test_neo_2(np)
+# fu.time.sleep(1)
+# fu.oled_update(oled_handle)
+# fu.test_neo_3(np)
+# fu.time.sleep(1)
+# fu.oled_test_write(oled_handle)
+# fu.test_neo_2(np)
+print("Test Done")

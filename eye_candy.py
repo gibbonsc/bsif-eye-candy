@@ -1,7 +1,7 @@
-import machine
-import ssd1306
-import time
-import framebuf
+#import machine # already imported in funcs.py
+#import ssd1306
+#import time
+#import framebuf #already imported in ssd1306.py
 
 def init_display():
     sda = machine.Pin(4)

@@ -3,7 +3,6 @@
 from ucryptolib import aes
 from uhashlib import sha256
 
-import frames as fr
 
 # This is how you would need to exec code; you do need to manually pass in
 # whatever variables from the external environment as μPython does not store
@@ -56,10 +55,6 @@ display = fu.dizplayz(128, 64, i2c_h)
 
 button_1_arr = [0,0,0,1,(1,1,1)]
 button_2_arr = [0,0,0,2,(1,1,1)]
-frams = fr.init_frames()
-anim_disp_seqs = display.init_seqs()
-current_anim = ''
-current_frame = 0
 disp_arr = ["> Toss Tater", "  Eat Tater", "  Dress Tater", "  Throw Tater"]
 texts_display = [
     ("> Toss Tater", "  Eat Tater", "  Dress Tater", "  Throw Tater"), 
@@ -107,7 +102,7 @@ wdt = fu.machine.WDT(timeout=8300) # Max Timeout on rp2040 devices is 8388...
 if __name__ == "__main__":
     while True:
         if current_state == STATE_A:
-            print("In State A", current_anim, current_frame)
+            # print("In State A")
             if not wlan_h.isconnected():
                 wlan_h.connect(fu.secrets.SSID, fu.secrets.PASSWORD)
             # button_1_arr, led_arr = fu.butt_check(button0, button_1_arr, leds=led_arr)
@@ -121,8 +116,6 @@ if __name__ == "__main__":
                 elif fu.check_spud(confusing_var):
                     current_state = STATE_F
                     print('spud_check_delay win')
-                    current_anim = 'winks'
-                    current_frame = len(anim_disp_seqs['winks'])-1
                 fu.up_neo(np, led_arr)
             fu.oled_update(oled_h, disp_arr)
             wdt.feed()
@@ -141,15 +134,8 @@ if __name__ == "__main__":
                     # print("Send it!")
                     fu.execute_order_66(confusing_var, 0)
                     # current_state = STATE_B  # Transition to State B
-            if not current_anim == '':
-                if current_frame < 1:
-                    current_anim = ''
-                    display.update_text(texts_display[0])
-                else:
-                    display.show_frame(frams,anim_disp_seqs,current_anim,current_frame)
-                    current_frame -= 1
         elif current_state == STATE_B:
-            print("In State B", current_anim, current_frame)
+            # print("In State B")
             if not wlan_h.isconnected():
                 wlan_h.connect(fu.secrets.SSID, fu.secrets.PASSWORD)
             # Add actions for State B here
@@ -160,8 +146,6 @@ if __name__ == "__main__":
                 wdt.feed()
                 if fu.check_spud(confusing_var) and spud_relay < 1:
                     current_state = STATE_F
-                    current_anim = 'winks'
-                    current_frame = len(anim_disp_seqs['winks'])-1
                 elif spud_relay > 1:
                     spud_relay -= 1
             fu.up_neo(np, led_arr)
@@ -184,7 +168,7 @@ if __name__ == "__main__":
                 else:
                     b1_ctr += 1
         elif current_state == STATE_C:
-            print("In State C", current_anim, current_frame)
+            # print("In State C")
             if not wlan_h.isconnected():
                 wlan_h.connect(fu.secrets.SSID, fu.secrets.PASSWORD)
             # Add actions for State C here
@@ -195,8 +179,6 @@ if __name__ == "__main__":
                 wdt.feed()
                 if fu.check_spud(confusing_var) and spud_relay < 1:
                     current_state = STATE_F
-                    current_anim = 'winks'
-                    current_frame = len(anim_disp_seqs['winks'])-1
                 elif spud_relay > 1:
                     spud_relay -= 1
             fu.up_neo(np, led_arr)
@@ -220,7 +202,7 @@ if __name__ == "__main__":
                     b1_ctr += 1
 
         elif current_state == STATE_D:
-            print("In State D", current_anim, current_frame)
+            # print("In State D")
             if not wlan_h.isconnected():
                 wlan_h.connect(fu.secrets.SSID, fu.secrets.PASSWORD)
             # Add actions for State D here
@@ -243,13 +225,11 @@ if __name__ == "__main__":
                     b0_ctr = 0
                     display.update_text(texts_display[0])
                     current_state = STATE_A
-                    current_anim = 'winks'
-                    current_frame = len(anim_disp_seqs['winks'])-1
                 else:
                     b0_ctr += 1
 
         elif current_state == STATE_E:
-            print("In State E", current_anim, current_frame)
+            print("In State E")
             if not wlan_h.isconnected():
                 wlan_h.connect(fu.secrets.SSID, fu.secrets.PASSWORD)
             # Add actions for State E here
@@ -272,22 +252,13 @@ if __name__ == "__main__":
                     b0_ctr = 0
                     display.update_text(texts_display[0])
                     current_state = STATE_A
-                    current_anim = 'winks'
-                    current_frame = len(anim_disp_seqs['winks'])-1
                 else:
                     b0_ctr += 1
  
         elif current_state == STATE_F:
-            print("In State F", current_anim, current_frame)
+            # print("In State F")
             if (spud_delay % 150) == 0:
-                if not current_anim == '':
-                    if current_frame == 0:
-                        current_anim = ''
-                    else:
-                        display.show_frame(frams,anim_disp_seqs,current_anim,current_frame)
-                        current_frame -= 1
-                else:
-                    display.update_text(['you', 'got', 'a', 'SPUD!!!!!'])
+                display.update_text(['you', 'got', 'a', 'SPUD!!!!!'])
                 fu.up_neo(np, led_arr)
                 fu.oled_update(oled_h, disp_arr)
                 spud_delay = spud_delay - 1
@@ -299,8 +270,6 @@ if __name__ == "__main__":
                 spud_relay = 5
                 display.update_text(texts_display[0])
                 current_state = STATE_A
-                current_anim = 'winks'
-                current_frame = len(anim_disp_seqs['winks'])-1
             if not wlan_h.isconnected():
                 wlan_h.connect(fu.secrets.SSID, fu.secrets.PASSWORD)
             wdt.feed()
