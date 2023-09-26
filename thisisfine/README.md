@@ -1,5 +1,7 @@
 I made an animated [meme](https://archive.ph/czkls) for the BSides Idaho Falls 2023 electronic badge. 😁
 
+![video of animated meme on the badge](frames_src/VID_20230926_141120650.mp4)
+
 Files:
 ------
 - boot.py : Initial platform setup, run on boot. This one is stripped down; it just invokes a garbage collector, once.
