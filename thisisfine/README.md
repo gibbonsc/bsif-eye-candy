@@ -1,6 +1,6 @@
 I made an animated [meme](https://archive.ph/czkls) for the BSides Idaho Falls 2023 electronic badge. 😁
 
-![video of animated meme on the badge](frames_src/VID_20230926_141120650.mp4)
+![download video of animated meme on the badge](frames_src/VID_20230926_141120650.mp4)
 
 Files:
 ------
@@ -23,7 +23,7 @@ I saved three different bitmaps,
 each with different patterns of flames in the background,
 to be used as three different frames of the animation.
 The `bitmap` utility saves files in an *.xbm* file format,
-which is a plaintext format designed to be to be included or directly copy-pasted as C or C++ source code files.
+which is a plaintext format designed to be to be included or directly copy-pasted into C or C++ source code.
 If you look at one in a text editor, you'll see something like this:
 ```
 #define thisisfine_width 128
