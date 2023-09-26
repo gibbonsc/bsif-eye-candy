@@ -43,7 +43,7 @@ The [`main.py`](main.py) script implements the animation on the badge. Here's a 
 - `import ssd1306`  # need this driver library to engage the display
 - `import framebuf`  # need this module for its fun functions and graphics primitives that enable creativity with yummy eye-candy
 - `import frames`  # using the bits converted from the *.xbm* files as if they're just another module
-- `import time`  # I'm lazy and I want to use `time.sleep()` instead of using the more complicated `utime` and `ticks_ms()` and arithmetic, that *proper* badge code must use
+- `import time`  # I'm lazy and I want to use `time.sleep()` instead of using the more complicated `utime` and `ticks_ms()` and arithmetic used by *proper* badge code
 
 - `frms=frames.init_frames()`  # slurp up all of those graphics bits, so that they're ready to be displayed
 - `i2c0=machine.I2C(0,scl=machine.Pin(5),sda=machine.Pin(4),freq=400000)`  # We have to play nice with the
