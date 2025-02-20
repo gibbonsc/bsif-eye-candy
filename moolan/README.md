@@ -9,7 +9,7 @@ Files:
 - i2c_eeprom.py : required for OLED display driver.
 - moolan_pyg.py : For convenience, I first coded the game with this code,
 which uses [pygame](https://www.pygame.org/) and CPython.
-Getting it was working well enough on my PC made it easier to adapt it to the MicroPython version found in main.py.
+Getting it working well enough on my PC made it a little easier to adapt to the MicroPython version found in main.py.
 
 Install:
 --------
